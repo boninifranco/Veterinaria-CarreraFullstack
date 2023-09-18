@@ -4,7 +4,7 @@ class Pacientes{
 
     constructor(nombre: string, especie: string){
         this.nombre = nombre;
-        this.setEspecie(especie);
+        this.setEspecie(especie); // # setEspecie para validar la especie #
     }
 
     public getMascotaNombre(): string{
@@ -16,7 +16,7 @@ class Pacientes{
     }
 
     public getEspecie(): string{
-        return this.clasificarEspecie();
+        return this.clasificarEspecie(); // # metodo para obtener la especie #
     }
 
     public setEspecie(nuevaEspecie: string){
