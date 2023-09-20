@@ -2,13 +2,11 @@ class Datos{
     private nombre: string;
     private telefono: number;
     private id: number;
-    private vip: boolean;
 
-    constructor(nombre: string, telefono: number, id: number, vip: boolean){
+    constructor(nombre: string, telefono: number, id: number){
         this.nombre = nombre;
         this.telefono = telefono;
         this.id = id;
-        this.vip = vip;
     }
 
     public getNombre(): string{
@@ -33,9 +31,5 @@ class Datos{
 
     public setId(nuevoId: number){
         this.id = nuevoId;
-    }
-
-    public getVip(): boolean{
-        return this.vip;
     }
 }
