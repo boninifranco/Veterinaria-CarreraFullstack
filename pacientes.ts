@@ -4,7 +4,7 @@ class Pacientes{
 
     constructor(nombre: string, especie: string){
         this.nombre = nombre;
-        this.setEspecie(especie); // # setEspecie para validar la especie #
+        this.especie = especie;
     }
 
     public getMascotaNombre(): string{
@@ -16,23 +16,20 @@ class Pacientes{
     }
 
     public getEspecie(): string{
-        return this.clasificarEspecie(); // # metodo para obtener la especie #
+        return this.clasificarEspecie(this.especie);
     }
 
     public setEspecie(nuevaEspecie: string){
         this.especie = nuevaEspecie;
     }
 
-    private clasificarEspecie(): string{
-        let perros: string[] = ["perro", "perrito", "can"];
-        let gatos: string[] = ["gato", "gatito", "felino"];
-        let especieLowerCase: string = this.especie.toLowerCase();
-        if (perros.includes(especieLowerCase)) {
-            return "Es un perro";
-        } else if (gatos.includes(especieLowerCase)) {
-            return "Es un gato";
+    public clasificarEspecie(especie): string{
+        if (especie.toLowerCase() == "perro") {
+            return especie.toLowerCase();
+        } else if (especie.toLowerCase() == "gato") {
+            return especie.toLowerCase();
         } else {
-            return "Es una especie exótica";
+            return "exótica";
         }
     }
 }
