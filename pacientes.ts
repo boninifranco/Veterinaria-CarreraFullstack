@@ -1,4 +1,4 @@
-class Pacientes{
+export class Pacientes{
     private nombre: string;
     private especie: string;
 
