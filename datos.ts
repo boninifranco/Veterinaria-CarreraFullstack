@@ -1,4 +1,4 @@
-class Datos{
+export class Datos{
     private nombre: string;
     private telefono: number;
     private id: number;
