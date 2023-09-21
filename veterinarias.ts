@@ -17,7 +17,7 @@ class Veterinaria {
         this.pacientes = [];
     }
 
-    public get getSucursales(): Sucursal[] {
+    public getSucursales(): Sucursal[] {
         return this.sucursales;
     }
 
@@ -25,7 +25,7 @@ class Veterinaria {
         this.sucursales.push(sucursal);
     }
 
-    public get getClientes(): Clientes[] {
+    public getClientes(): Clientes[] {
         return this.clientes;
     }
 
@@ -33,7 +33,7 @@ class Veterinaria {
         this.clientes.push(cliente);
     }
 
-    public get getPacientes(): Pacientes[] {
+    public getPacientes(): Pacientes[] {
         return this.pacientes;
     }
 
@@ -70,7 +70,7 @@ class Veterinaria {
 
     public esIdUnico(id: number): boolean {
         for (const veterinaria of this.sucursales) {
-            if (veterinaria.getId === id) {
+            if (veterinaria.getId() === id) {
                 return false;
             }
         }
@@ -83,13 +83,19 @@ class Veterinaria {
 
     public mostrarInfoSucursales(): void {
         this.sucursales.forEach((sucursal, index) => {
-            console.log(`[${index}]  Nombre: ${sucursal.getNombre}     Direccion: ${sucursal.getDireccion}     ID: ${sucursal.getId}     `);
+            console.log(`[${index}]  Nombre: ${sucursal.getNombre()}     Direccion: ${sucursal.getDireccion()}     ID: ${sucursal.getId()}     `);
         });
     }
 
     public mostrarInfoClientes(): void {
         this.clientes.forEach((cliente, index) => {
             console.log(`[${index}]  Nombre: ${cliente.getNombre()}     Telefono: ${cliente.getTelefono()}     ID: ${cliente.getId()}     Visitas: ${cliente.getVisitas()}     VIP: ${cliente.getVip()}`);
+        });
+    }
+
+    public mostrarInfoPacientes(): void {
+        this.pacientes.forEach((pacientes, index) => {
+            console.log(`[${index}]  Nombre: ${pacientes.getMascotaNombre()}   Especie: ${pacientes.getEspecie()}`);
         });
     }
 
@@ -103,11 +109,16 @@ class Veterinaria {
         this.setClientes(nuevoCliente);
     }
 
+    public darAltaPaciente(nuevoPaciente: Pacientes): void {
+        console.log("\nEl paciente se ha agregado con éxito\n");
+        this.setPacientes(nuevoPaciente);
+    }
+
     public darBajaSucursal(): void {
         console.log(`\n--------Eliminar Sucursal--------\n`);
         this.mostrarInfoSucursales();
         let opcion: number = readline.questionInt("\nElija la sucursal que desea eliminar: ");
-        this.getSucursales.splice(opcion, 1);
+        this.getSucursales().splice(opcion, 1);
         console.log("\nLa sucursal ha sido eliminado con éxito");
     }
 
@@ -115,8 +126,16 @@ class Veterinaria {
         console.log(`\n--------Eliminar Cliente--------\n`);
         this.mostrarInfoClientes();
         let opcion: number = readline.questionInt("\nElija el cliente que desea eliminar: ");
-        this.getClientes.splice(opcion, 1);
+        this.getClientes().splice(opcion, 1);
         console.log("\nEl cliente ha sido eliminado con éxito");
+    }
+
+    public darBajaPaciente(): void {
+        console.log(`\n--------Eliminar Paciente--------\n`);
+        this.mostrarInfoPacientes();
+        let opcion: number = readline.questionInt("\nElija el paciente que desea eliminar: ");
+        this.getPacientes().splice(opcion, 1);
+        console.log("\nEl paciente ha sido eliminado con éxito");
     }
 
     public modificarDatosSucursal(): void {
@@ -139,5 +158,25 @@ class Veterinaria {
         this.clientes[opcion].setNombre(nombre);
         this.clientes[opcion].setTelefono(telefono);
         console.log("\nEl cliente ha sido modificada con éxito");
+    }
+
+    public modificarDatosPacientes(): void {
+        console.log(`\n--------Modificar Paciente--------\n`);
+        this.mostrarInfoPacientes();
+        let opcion: number = readline.questionInt("\nElija cual desea modificar: ");
+        let nombre: string = readline.question("Nombre: ");
+        let especie: string = readline.question("Especie: ");
+        this.pacientes[opcion].setMascotaNombre(nombre);
+        this.pacientes[opcion].setEspecie(especie);
+        console.log("\nEl paciente ha sido modificada con éxito");
+    }
+
+    public generarBaseDeDatosPacientes(): void {
+        console.log(`\n--------Agregar Pacientes--------\n`);
+        let nombre: string = readline.question("Nombre: ");
+        let especie: string = readline.question("Especie: ");
+        let nuevoPaciente: Pacientes = new Pacientes(nombre, especie);
+        this.darAltaPaciente(nuevoPaciente);
+        this.mostrarInfoPacientes();
     }
 }
