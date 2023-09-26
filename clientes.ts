@@ -11,26 +11,26 @@ export class Clientes extends Datos{
         this.vip = false;
     }
     //Método acumulador de visitas:
-    public nuveVisita(){
+    public nuevaVisita(){
         this.visitas += 1;
         if (this.visitas >= 5){
             this.setVip(true);
-            console.log(`El cliente ${this.getNombre} ahora es VIP`);
+            console.log(`El cliente ${this.getNombre()} ahora es VIP`);
             
         }
         console.log(this.cantidadDeVisitas());
     }
     //Método que devuelve la cantidad de visitas:
     public cantidadDeVisitas(){
-        console.log(`La cantidad de visitas realizadas por ${this.getNombre} es: ${this.visitas}`)
+        console.log(`La cantidad de visitas realizadas por ${this.getNombre()} es: ${this.visitas}`)
     }
     //Método para consultar 
     public consultaVIP(){
         if (this.getVip() === true){
-            console.log(`El cliente ${this.getNombre} es un usuario VIP`)    
+            console.log(`El cliente ${this.getNombre()} es un usuario VIP`)    
         }
         else {
-            console.log(`El cliente ${this.getNombre} NO es un usuario VIP`)
+            console.log(`El cliente ${this.getNombre()} NO es un usuario VIP`)
         }
     }
     //Getters y Setters:
