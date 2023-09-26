@@ -9,7 +9,7 @@ export class Sucursal {
             this.id = id;
     }
 
-    public get getNombre(): string {
+    public getNombre(): string {
         return this.nombre;
     }
 
@@ -17,7 +17,7 @@ export class Sucursal {
         this.nombre = nombre;
     }
 
-    public get getId(): number {
+    public getId(): number {
         return this.id
     }
 
@@ -25,7 +25,7 @@ export class Sucursal {
         this.id = id;
     }
 
-    public get getDireccion(): string {
+    public getDireccion(): string {
         return this.direccion;
     }
 
