@@ -1,29 +1,39 @@
-export class Pacientes{
+export class Pacientes {
     private nombre: string;
     private especie: string;
+    private id: number;
 
-    constructor(nombre: string, especie: string){
+    constructor(nombre: string, especie: string, id: number) {
         this.nombre = nombre;
         this.especie = especie;
+        this.id = id;
     }
 
-    public getMascotaNombre(): string{
+    public getMascotaNombre(): string {
         return this.nombre;
     }
 
-    public setMascotaNombre(nuevaMascota: string){
+    public setMascotaNombre(nuevaMascota: string) {
         this.nombre = nuevaMascota;
     }
 
-    public getEspecie(): string{
+    public getEspecie(): string {
         return this.clasificarEspecie(this.especie);
     }
 
-    public setEspecie(nuevaEspecie: string){
+    public setEspecie(nuevaEspecie: string) {
         this.especie = nuevaEspecie;
     }
 
-    public clasificarEspecie(especie): string{
+    public getId(): number {
+        return this.id;
+    }
+
+    public setId(id: number): void{
+        this.id = id;
+    }
+
+    public clasificarEspecie(especie): string {
         if (especie.toLowerCase() == "perro") {
             return especie.toLowerCase();
         } else if (especie.toLowerCase() == "gato") {
