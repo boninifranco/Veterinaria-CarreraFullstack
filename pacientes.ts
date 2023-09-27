@@ -33,7 +33,7 @@ export class Pacientes {
         this.id = id;
     }
 
-    public clasificarEspecie(especie): string {
+    public clasificarEspecie(especie: string): string{
         if (especie.toLowerCase() == "perro") {
             return especie.toLowerCase();
         } else if (especie.toLowerCase() == "gato") {
