@@ -1,10 +1,12 @@
 export class Pacientes{
     private nombre: string;
     private especie: string;
+    private id: number
 
-    constructor(nombre: string, especie: string){
+    constructor(nombre: string, especie: string, id: number){
         this.nombre = nombre;
         this.especie = especie;
+        this.id = id;
     }
 
     public getMascotaNombre(): string{
@@ -21,6 +23,14 @@ export class Pacientes{
 
     public setEspecie(nuevaEspecie: string){
         this.especie = nuevaEspecie;
+    }
+
+    public getId(): number {
+        return this.id;
+    }
+
+    public setId(id: number): void{
+        this.id = id;
     }
 
     public clasificarEspecie(especie): string{
