@@ -3,7 +3,7 @@ export class Pacientes {
     private especie: string;
     private id: number;
 
-    constructor(nombre: string, especie: string, id: number) {
+    constructor(nombre: string, especie: string, id: number){
         this.nombre = nombre;
         this.especie = especie;
         this.id = id;
@@ -29,11 +29,12 @@ export class Pacientes {
         return this.id;
     }
 
-    public setId(id: number): void{
+    public setId(id: number): void {
         this.id = id;
     }
 
-    public clasificarEspecie(especie: string): string{
+    public clasificarEspecie(especie: string): string {
+
         if (especie.toLowerCase() == "perro") {
             return especie.toLowerCase();
         } else if (especie.toLowerCase() == "gato") {
