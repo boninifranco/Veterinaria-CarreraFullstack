@@ -2,10 +2,9 @@ import * as readline from "readline-sync";
 
 import { Sucursal } from './sucursal';
 import { Clientes } from './clientes';
-import { Proveedores } from './proveedores';
 import { Pacientes } from './pacientes'
 
-class Veterinaria {
+export class Veterinaria {
     private sucursales: Sucursal[];
     private clientes: Clientes[];
     private pacientes: Pacientes[];
@@ -40,6 +39,7 @@ class Veterinaria {
         this.pacientes.push(paciente);
     }
 
+    //Metodos el cual se crea cada instancia guardandose en su arreglo correspondiente.
     public generarBaseDeDatosSucursales(): void {
         console.log(`\n--------Agregar Sucursal--------\n`);
         let nombre: string = readline.question("Nombre: ");
@@ -83,6 +83,8 @@ class Veterinaria {
     }
 
     public esIdUnico(id: number): boolean {
+        //Se valida si el id generado aleatorio esta entre los id ya generados
+        //anteriormente, de ser asi se genera otro hasta que no se igualen
         for (const sucursal of this.sucursales) {
             if (sucursal.getId() === id) {
                 return false;
@@ -97,9 +99,11 @@ class Veterinaria {
     }
 
     public generarId(): number {
-        return Math.floor(Math.random() * 5) + 1;
+        //Se genera un id aleatorio
+        return Math.floor(Math.random() * 10) + 1;
     }
 
+    //Muestra en consola la info de cada arreglo con su index para poder interactuar con el menu
     public mostrarInfoSucursales(): void {
         if(this.getSucursales().length > 0){
             this.sucursales.forEach((sucursal, index) => {
@@ -130,6 +134,8 @@ class Veterinaria {
         }
     }
 
+    //Metodo el cual si se convalidan lo requerido en la base de datos se pushea
+    //a su respectivo arereglo
     public darAltaSucursal(nuevaSucursal: Sucursal): void {
         console.log("\nLa sucursal se ha agregado con éxito\n");
         this.setSucursal(nuevaSucursal);
@@ -145,6 +151,9 @@ class Veterinaria {
         this.setPacientes(nuevoPaciente);
     }
 
+    //Metodo el cual se muestra por consola la informacion de las propiedades de cada arreglo
+    //correspondiente, el cual por medio de una interaccion con el menu se elige cual elemento
+    //se desea borrar
     public darBajaSucursal(): void {
         console.log(`\n--------Eliminar Sucursal--------\n`);
         this.mostrarInfoSucursales();
@@ -169,6 +178,8 @@ class Veterinaria {
         console.log("\n---El paciente ha sido eliminado con éxito---");
     }
 
+    //Metodo en el que por medio de la consola se muestran todos los elementos del arreglo y
+    //se elige cual se desea modificar
     public modificarDatosSucursal(): void {
         console.log(`\n--------Modificar Sucursal--------\n`);
         this.mostrarInfoSucursales();
