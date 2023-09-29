@@ -2,10 +2,9 @@ import * as readline from "readline-sync";
 
 import { Sucursal } from './sucursal';
 import { Clientes } from './clientes';
-import { Proveedores } from './proveedores';
 import { Pacientes } from './pacientes'
 
-class Veterinaria {
+export class Veterinaria {
     private sucursales: Sucursal[];
     private clientes: Clientes[];
     private pacientes: Pacientes[];

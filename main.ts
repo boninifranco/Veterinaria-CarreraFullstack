@@ -3,13 +3,19 @@ import * as readline from "readline-sync";
 import { Proveedores } from './proveedores';
 import { Veterinaria } from './veterinarias';
 
+let terminarPrograma: boolean = false;
+
 function iniciarPrograma(): void {
     let veterinaria: Veterinaria = new Veterinaria();
     let proveedores: Proveedores = new Proveedores('', 0, 0);
-    let terminarPrograma: boolean = false;
     mensajeIniciarPrograma();
     let option = readline.questionInt("Presione la opcion elegida: ");
-    switchIniciarPrograma(option, veterinaria, proveedores);
+    do {
+        switchIniciarPrograma(option, veterinaria, proveedores);
+        if (option === 0) {
+            terminarPrograma = true;
+        }
+    } while (!terminarPrograma)
 }
 
 function mensajeIniciarPrograma(): void {
@@ -17,11 +23,11 @@ function mensajeIniciarPrograma(): void {
 }
 
 function mensajeSwitches(nombreDelArreglo: string): void {
-    console.log(`\n[1]Agregar ${nombreDelArreglo}\n[2]Modificar ${nombreDelArreglo}\n[3]Eliminar ${nombreDelArreglo}\n[4]Mostrar ${nombreDelArreglo}\n[0]Salir\n`);
+    console.log(`\n[1]Agregar ${nombreDelArreglo}\n[2]Modificar ${nombreDelArreglo}\n[3]Eliminar ${nombreDelArreglo}\n[4]Mostrar ${nombreDelArreglo}\n[9]Menu Principal\n[0]Salir\n`);
 }
 
 function mensajeSwitchCliente(): void {
-    console.log(`\n[1]Agregar cliente\n[2]Agregar nueva visita\n[3]Modificar cliente\n[4]Eliminar cliente\n[5]Mostrar clientes\n[0]Salir\n`);
+    console.log(`\n[1]Agregar cliente\n[2]Agregar nueva visita\n[3]Modificar cliente\n[4]Eliminar cliente\n[5]Mostrar clientes\n[9]Menu Principal\n[0]Salir\n`);
 }
 
 function switchIniciarPrograma(option: number, veterinaria: Veterinaria, proovedores: Proveedores): void {
@@ -60,6 +66,10 @@ function switchClientes(clientes: Veterinaria): void {
         case 5:
             clientes.mostrarInfoClientes();
             break;
+        case 9: iniciarPrograma();
+            break;
+        case 0: terminarPrograma = true;
+            break;
     }
 }
 
@@ -78,6 +88,10 @@ function switchPacientes(pacientes: Veterinaria): void {
             break;
         case 4:
             pacientes.mostrarInfoPacientes();
+        case 9: iniciarPrograma();
+            break;
+        case 0: terminarPrograma = true;
+            break;
     }
 }
 
@@ -96,6 +110,10 @@ function switchProveedores(proveedores: Proveedores): void {
             break;
         case 4:
             proveedores.mostrarInfoProveedores();
+        case 9: iniciarPrograma();
+            break;
+        case 0: terminarPrograma = true;
+            break;
     }
 }
 
@@ -114,6 +132,10 @@ function switchSucursales(sucursales: Veterinaria) {
             break;
         case 4:
             sucursales.mostrarInfoSucursales();
+            break;
+        case 9: iniciarPrograma();
+            break;
+        case 0: terminarPrograma = true;
             break;
     }
 }
