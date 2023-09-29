@@ -1,6 +1,6 @@
 import { Datos } from "./datos";
 
-export class Clientes extends Datos{
+export class Clientes extends Datos {
 
     private visitas: number;
     private vip: boolean;
@@ -11,39 +11,35 @@ export class Clientes extends Datos{
         this.vip = false;
     }
     //Método acumulador de visitas:
-    public nuevaVisita(){
+    public nuevaVisita(): void {
         this.visitas += 1;
-        if (this.visitas >= 5){
+        if (this.visitas >= 5) {
             this.setVip(true);
-            console.log(`El cliente ${this.getNombre()} ahora es VIP`);
-            
+            console.log(`\nEl cliente ${this.getNombre()} ahora es VIP\n`);
+
         }
-        console.log(this.cantidadDeVisitas());
     }
-    //Método que devuelve la cantidad de visitas:
-    public cantidadDeVisitas(){
-        console.log(`La cantidad de visitas realizadas por ${this.getNombre()} es: ${this.visitas}`)
-    }
+    
     //Método para consultar 
-    public consultaVIP(){
-        if (this.getVip() === true){
-            console.log(`El cliente ${this.getNombre()} es un usuario VIP`)    
+    public consultaVIP(): void {
+        if (this.getVip() === true) {
+            console.log(`\nEl cliente ${this.getNombre()} es un usuario VIP\n`)
         }
         else {
             console.log(`El cliente ${this.getNombre()} NO es un usuario VIP`)
         }
     }
     //Getters y Setters:
-    public getVisitas(){
+    public getVisitas(): number {
         return this.visitas;
     }
-    public setVisitas(cantidad: number){
+    public setVisitas(cantidad: number) {
         this.visitas = cantidad;
     }
-    public getVip(){
+    public getVip(): boolean {
         return this.vip;
     }
-    public setVip(ingresoVip: boolean){
+    public setVip(ingresoVip: boolean): void {
         this.vip = ingresoVip;
     }
 }

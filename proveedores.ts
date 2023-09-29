@@ -2,20 +2,19 @@ import * as readline from "readline-sync";
 
 import { Datos } from "./datos";
 
-export class Proveedores extends Datos{
+export class Proveedores extends Datos {
 
     private proveedores: Proveedores[];
-
-    public constructor(nombre: string, telefono: number, id: number){
-        super(nombre,telefono,id);
-        
+    
+    public constructor(nombre: string, telefono: number, id: number) {
+        super(nombre, telefono, id);
         this.proveedores = [];
     }
     //Getters y Setters:
-    public get getProveedores(): Proveedores[]{
+    public getProveedores(): Proveedores[] {
         return this.proveedores;
     }
-    public setProveedores(proveedor: Proveedores): void{
+    public setProveedores(proveedor: Proveedores): void {
         this.proveedores.push(proveedor);
     }
 
@@ -28,16 +27,19 @@ export class Proveedores extends Datos{
         do {
             id = this.generarId();
         } while (!this.esIdUnico(id));
-        console.log("Se crea el proveedor");
         let nuevoProveedor: Proveedores = new Proveedores(nombre, telefono, id);
         this.darAltaProveedor(nuevoProveedor);
         this.mostrarInfoProveedores();
     }
 
     public mostrarInfoProveedores(): void {
-        this.proveedores.forEach((proveedor, index) => {
-            console.log(`[${index}]  Nombre: ${proveedor.getNombre()}     Telefono: ${proveedor.getTelefono()}     ID: ${proveedor.getId()} `);
-        });
+        if (this.getProveedores().length > 0) {
+            this.proveedores.forEach((proveedor, index) => {
+                console.log(`[${index}]  Nombre: ${proveedor.getNombre()}     Telefono: ${proveedor.getTelefono()}     ID: ${proveedor.getId()} `);
+            });
+        } else {
+            console.log("**No hay ningun proveedor en la base de datos**");
+        }
     }
 
     public darAltaProveedor(nuevoProveedor: Proveedores): void {
@@ -46,22 +48,32 @@ export class Proveedores extends Datos{
     }
 
     public darBajaProveedor(): void {
-        console.log(`\n--------Eliminar Proveedor--------\n`);
-        this.mostrarInfoProveedores();
-        let opcion: number = readline.questionInt("\nElija el proveedor que desea eliminar: ");
-        this.getProveedores.splice(opcion, 1);
-        console.log("\nEl proveedor ha sido eliminado con éxito");
+        if(this.getProveedores().length > 0){
+            console.log(`\n--------Eliminar Proveedor--------\n`);
+            this.mostrarInfoProveedores();
+            let opcion: number = readline.questionInt("\nElija el proveedor que desea eliminar: ");
+            this.getProveedores().splice(opcion, 1);
+            console.log("\n---El proveedor ha sido eliminado con éxito---");
+        } else {
+            console.log("**No hay ningun proveedor en la base de datos**");
+        }
+
     }
 
     public modificarDatosProveedor(): void {
-        console.log(`\n--------Modificar Proveedor--------\n`);
-        this.mostrarInfoProveedores();
-        let opcion: number = readline.questionInt("\nElija cual desea modificar: ");
-        let nombre: string = readline.question("Nombre: ");
-        let telefono: number = readline.questionInt("Telefono: ");
-        this.proveedores[opcion].setNombre(nombre);
-        this.proveedores[opcion].setTelefono(telefono);
-        console.log("\nEl proveedor ha sido modificada con éxito");
+        if(this.getProveedores().length > 0){
+            console.log(`\n--------Modificar Proveedor--------\n`);
+            this.mostrarInfoProveedores();
+            let opcion: number = readline.questionInt("\nElija cual desea modificar: ");
+            let nombre: string = readline.question("Nombre: ");
+            let telefono: number = readline.questionInt("Telefono: ");
+            this.proveedores[opcion].setNombre(nombre);
+            this.proveedores[opcion].setTelefono(telefono);
+            console.log("\n---El proveedor ha sido modificada con éxito---");
+        } else {
+            console.log("**No hay ningun proveedor en la base de datos**");
+        }
+
     }
 
     //ID:
