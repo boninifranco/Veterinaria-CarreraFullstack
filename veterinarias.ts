@@ -11,9 +11,22 @@ class Veterinaria {
     private pacientes: Pacientes[];
 
     constructor() {
-        this.sucursales = [];
-        this.clientes = [];
-        this.pacientes = [];
+        let sucursal = new Sucursal("CEPIT", "Tandil", 0);
+        let sucursal1 = new Sucursal("El buen refugio", "Chaves", 1);
+        let sucursal2 = new Sucursal("El Torito", "De la garma", 2);
+        let cliente = new Clientes("Juliana", 45645641, 0);
+        let cliente1 = new Clientes("Georgina", 87465465, 1);
+        let cliente2 = new Clientes("Nahuel", 92839291, 2);
+        let paciente = new Pacientes("Zeus", "Perro", 0);
+        let paciente1 = new Pacientes("Sheldon", "Gato", 0);
+        let paciente2 = new Pacientes("Lolo", "Perro", 0);
+        let paciente3 = new Pacientes("Paco", "Loro", 2);
+        let paciente4 = new Pacientes("Manchas", "Perro", 2);
+        let paciente5 = new Pacientes("Tito", "Mono", 1);
+        let paciente6 = new Pacientes("Pirata", "Perro", 1);
+        this.sucursales = [sucursal, sucursal1, sucursal2];
+        this.clientes = [cliente, cliente1, cliente2];
+        this.pacientes = [paciente, paciente1, paciente2, paciente3, paciente4, paciente5, paciente6];
     }
 
     public getSucursales(): Sucursal[] {
@@ -64,13 +77,12 @@ class Veterinaria {
         } while (!this.esIdUnico(id));
         let nuevoCliente: Clientes = new Clientes(nombre, telefono, id);
         this.darAltaCliente(nuevoCliente);
-        do{
+        do {
             this.generarBaseDeDatosPacientes(id);
             console.log("\n[1] Si\n[Cualquier otro numero] No");
             option = readline.questionInt(`\nDesea agregar otra mascota a la lista del cliente ${nuevoCliente.getNombre()}?: `);
-        }while(option === 1)
+        } while (option === 1)
         this.mostrarInfoClientes();
-
     }
 
     private generarBaseDeDatosPacientes(id: number): void {
@@ -88,8 +100,8 @@ class Veterinaria {
                 return false;
             }
         }
-        for (const cliente of this.clientes){
-            if (cliente.getId() === id){
+        for (const cliente of this.clientes) {
+            if (cliente.getId() === id) {
                 return false;
             }
         }
@@ -101,32 +113,32 @@ class Veterinaria {
     }
 
     public mostrarInfoSucursales(): void {
-        if(this.getSucursales().length > 0){
+        if (this.getSucursales().length > 0) {
             this.sucursales.forEach((sucursal, index) => {
                 console.log(`[${index}]  Nombre: ${sucursal.getNombre()}     Direccion: ${sucursal.getDireccion()}     ID: ${sucursal.getId()}     `);
             });
         } else {
-            console.log("No hay ninguna sucursal en la base de datos");
+            console.log("**No hay ninguna sucursal en la base de datos**");
         }
     }
 
     public mostrarInfoClientes(): void {
-        if(this.getClientes().length > 0){
+        if (this.getClientes().length > 0) {
             this.clientes.forEach((cliente, index) => {
                 console.log(`[${index}]  Nombre: ${cliente.getNombre()}     Telefono: ${cliente.getTelefono()}     ID: ${cliente.getId()}     Visitas: ${cliente.getVisitas()}     VIP: ${cliente.getVip()}`);
             });
-        }else {
-            console.log("No hay ningun cliente en la base de datos");
+        } else {
+            console.log("**No hay ningun cliente en la base de datos**");
         }
     }
 
     public mostrarInfoPacientes(): void {
-        if(this.getPacientes().length > 0){
+        if (this.getPacientes().length > 0) {
             this.pacientes.forEach((pacientes, index) => {
                 console.log(`[${index}]  Nombre: ${pacientes.getMascotaNombre()}   Especie: ${pacientes.getEspecie()}     ID: ${pacientes.getId()}`);
             });
         } else {
-            console.log("No hay ningun paciente en la base de datos");
+            console.log("**No hay ningun paciente en la base de datos**");
         }
     }
 
@@ -145,70 +157,118 @@ class Veterinaria {
         this.setPacientes(nuevoPaciente);
     }
 
+
+    public nuevaVisitaACliente(): void {
+        this.mostrarInfoClientes();
+        let opcion: number = readline.questionInt("\nElija al cliente que desea agregar la visita: ");
+        this.getClientes()[opcion].nuevaVisita();
+        this.mostrarInfoClientes();
+    }
+
+    public nuevoPacienteClienteExistente(): void {
+        this.mostrarInfoClientes();
+        let id: number;
+        let opcion: number = readline.questionInt("\nElija al cliente que desea agregar el nuevo paciente: ");
+        id = this.getClientes()[opcion].getId();
+        this.generarBaseDeDatosPacientes(id)
+    }
+
+    //Metodo el cual se muestra por consola la informacion de las propiedades de cada arreglo
+    //correspondiente, el cual por medio de una interaccion con el menu se elige cual elemento
+    //se desea borrar
     public darBajaSucursal(): void {
-        console.log(`\n--------Eliminar Sucursal--------\n`);
-        this.mostrarInfoSucursales();
-        let opcion: number = readline.questionInt("\nElija la sucursal que desea eliminar: ");
-        this.getSucursales().splice(opcion, 1);
-        console.log("\n---La sucursal ha sido eliminado con éxito---");
+        if (this.getSucursales().length > 0) {
+            console.log(`\n--------Eliminar Sucursal--------\n`);
+            this.mostrarInfoSucursales();
+            let opcion: number = readline.questionInt("\nElija la sucursal que desea eliminar: ");
+            this.getSucursales().splice(opcion, 1);
+            this.mostrarInfoSucursales();
+            console.log("\n---La sucursal ha sido eliminado con éxito---");
+        } else {
+            console.log("No hay ninguna sucursal en la base de datos");
+        }
     }
 
     public darBajaCliente(): void {
-        console.log(`\n--------Eliminar Cliente--------\n`);
-        this.mostrarInfoClientes();
-        let opcion: number = readline.questionInt("\nElija el cliente que desea eliminar: ");
-        this.getClientes().splice(opcion, 1);
-        console.log("\n---El cliente ha sido eliminado con éxito---");
+        if (this.getClientes().length > 0) {
+            console.log(`\n--------Eliminar Cliente--------\n`);
+            this.mostrarInfoClientes();
+            let opcion: number = readline.questionInt("\nElija el cliente que desea eliminar: ");
+            this.getClientes().splice(opcion, 1);
+            this.mostrarInfoClientes();
+            console.log("\n---El cliente ha sido eliminado con éxito---");
+        } else {
+            console.log("No hay ningun cliente en la base de datos");
+        }
+
     }
 
     public darBajaPaciente(): void {
-        console.log(`\n--------Eliminar Paciente--------\n`);
-        this.mostrarInfoPacientes();
-        let opcion: number = readline.questionInt("\nElija el paciente que desea eliminar: ");
-        this.getPacientes().splice(opcion, 1);
-        console.log("\n---El paciente ha sido eliminado con éxito---");
+        if (this.getPacientes().length > 0) {
+            console.log(`\n--------Eliminar Paciente--------\n`);
+            this.mostrarInfoPacientes();
+            let opcion: number = readline.questionInt("\nElija el paciente que desea eliminar: ");
+            this.getPacientes().splice(opcion, 1);
+            this.mostrarInfoPacientes();
+            console.log("\n---El paciente ha sido eliminado con éxito---");
+        } else {
+            console.log("No hay ningun paciente en la base de datos");
+        }
     }
 
     public modificarDatosSucursal(): void {
-        console.log(`\n--------Modificar Sucursal--------\n`);
-        this.mostrarInfoSucursales();
-        let opcion: number = readline.questionInt("\nElija cual desea modificar: ");
-        let nombre: string = readline.question("Nombre: ");
-        let direccion: string = readline.question("Direccion: ");
-        this.sucursales[opcion].setNombre(nombre);
-        this.sucursales[opcion].setDireccion(direccion);
-        this.mostrarInfoSucursales();
-        console.log("\n---La sucursal ha sido modificada con éxito---");
+        if (this.getSucursales().length > 0) {
+            console.log(`\n--------Modificar Sucursal--------\n`);
+            this.mostrarInfoSucursales();
+            let opcion: number = readline.questionInt("\nElija cual desea modificar: ");
+            let nombre: string = readline.question("Nombre: ");
+            let direccion: string = readline.question("Direccion: ");
+            this.sucursales[opcion].setNombre(nombre);
+            this.sucursales[opcion].setDireccion(direccion);
+            this.mostrarInfoSucursales();
+            console.log("\n---La sucursal ha sido modificada con éxito---");
+        } else {
+            console.log("**No hay ninguna sucursal en la base de datos**");
+        }
+      
     }
 
     public modificarDatosCliente(): void {
-        console.log(`\n--------Modificar Cliente--------\n`);
-        this.mostrarInfoClientes();
-        let opcionCliente: number = readline.questionInt("\nElija cual desea modificar: ");
-        let nombre: string = readline.question("Nombre: ");
-        let telefono: number = readline.questionInt("Telefono: ");
-        let id : number = this.clientes[opcionCliente].getId();
-        this.clientes[opcionCliente].setNombre(nombre);
-        this.clientes[opcionCliente].setTelefono(telefono);
-        this.mostrarInfoClientes();
-        console.log("\n[1] Si\n[Cualquier otro numero] No");
-        let opcionMascota : number = readline.questionInt("Desea agregar otra mascota a la base de datos del cliente?: ");
-        if(opcionMascota === 1){
-            this.generarBaseDeDatosPacientes(id);
-        }else {
-            console.log("\n---El cliente ha sido modificada con éxito---");
+        if (this.getClientes().length > 0) {
+            console.log(`\n--------Modificar Cliente--------\n`);
+            this.mostrarInfoClientes();
+            let opcionCliente: number = readline.questionInt("\nElija cual desea modificar: ");
+            let nombre: string = readline.question("Nombre: ");
+            let telefono: number = readline.questionInt("Telefono: ");
+            let id: number = this.clientes[opcionCliente].getId();
+            this.clientes[opcionCliente].setNombre(nombre);
+            this.clientes[opcionCliente].setTelefono(telefono);
+            this.mostrarInfoClientes();
+            console.log("\n[1] Si\n[Cualquier otro numero] No");
+            let opcionMascota: number = readline.questionInt("Desea agregar otra mascota a la base de datos del cliente?: ");
+            if (opcionMascota === 1) {
+                this.generarBaseDeDatosPacientes(id);
+            } else {
+                console.log("\n---El cliente ha sido modificada con éxito---");
+            }
+        } else {
+            console.log("**No hay ningun cliente en la base de datos**");
         }
     }
 
     public modificarDatosPacientes(): void {
-        console.log(`\n--------Modificar Paciente--------\n`);
-        this.mostrarInfoPacientes();
-        let opcion: number = readline.questionInt("\nElija cual desea modificar: ");
-        let nombre: string = readline.question("Nombre: ");
-        let especie: string = readline.question("Especie: ");
-        this.pacientes[opcion].setMascotaNombre(nombre);
-        this.pacientes[opcion].setEspecie(especie);
-        this.mostrarInfoPacientes();
-        console.log("\n---El paciente ha sido modificada con éxito---");
+        if (this.getPacientes().length > 0) {
+            console.log(`\n--------Modificar Paciente--------\n`);
+            this.mostrarInfoPacientes();
+            let opcion: number = readline.questionInt("\nElija cual desea modificar: ");
+            let nombre: string = readline.question("Nombre: ");
+            let especie: string = readline.question("Especie: ");
+            this.pacientes[opcion].setMascotaNombre(nombre);
+            this.pacientes[opcion].setEspecie(especie);
+            this.mostrarInfoPacientes();
+            console.log("\n---El paciente ha sido modificada con éxito---");
+        } else {
+            console.log("**No hay ningun paciente en la base de datos**");
+        }
     }
 }
