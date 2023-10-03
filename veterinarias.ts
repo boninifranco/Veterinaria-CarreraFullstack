@@ -10,6 +10,7 @@ export class Veterinaria {
     private pacientes: Pacientes[];
 
     constructor() {
+        //carga de datos abm
         let sucursal = new Sucursal("CEPIT", "Tandil", 0);
         let sucursal1 = new Sucursal("El buen refugio", "Chaves", 1);
         let sucursal2 = new Sucursal("El Torito", "De la garma", 2);
@@ -27,7 +28,7 @@ export class Veterinaria {
         this.clientes = [cliente, cliente1, cliente2];
         this.pacientes = [paciente, paciente1, paciente2, paciente3, paciente4, paciente5, paciente6];
     }
-
+    //getters y setters:
     public getSucursales(): Sucursal[] {
         return this.sucursales;
     }
@@ -93,7 +94,7 @@ export class Veterinaria {
         this.darAltaPaciente(nuevoPaciente);
         this.mostrarInfoPacientes();
     }
-
+    //metodo para generar y comparar ID
     public esIdUnico(id: number): boolean {
         //Se valida si el id generado aleatorio esta entre los id ya generados
         //anteriormente, de ser asi se genera otro hasta que no se igualen
@@ -164,14 +165,14 @@ export class Veterinaria {
     }
 
 
-
+    //se agrega una visita al cliente
     public nuevaVisitaACliente(): void {
         this.mostrarInfoClientes();
         let opcion: number = readline.questionInt("\nElija al cliente que desea agregar la visita: ");
         this.getClientes()[opcion].nuevaVisita();
         this.mostrarInfoClientes();
     }
-
+    //se agrega una paciente/mascota a determinado
     public nuevoPacienteClienteExistente(): void {
         this.mostrarInfoClientes();
         let id: number;

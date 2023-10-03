@@ -86,6 +86,9 @@ function switchPacientes(pacientes) {
         case 9:
             iniciarPrograma();
             break;
+        case 0:
+            terminarPrograma = true;
+            break;
     }
 }
 function switchProveedores(proveedores) {
@@ -105,6 +108,9 @@ function switchProveedores(proveedores) {
             proveedores.mostrarInfoProveedores();
         case 9:
             iniciarPrograma();
+            break;
+        case 0:
+            terminarPrograma = true;
             break;
     }
 }
@@ -126,6 +132,9 @@ function switchSucursales(sucursales) {
             break;
         case 9:
             iniciarPrograma();
+            break;
+        case 0:
+            terminarPrograma = true;
             break;
     }
 }

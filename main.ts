@@ -5,6 +5,8 @@ import { Veterinaria } from './veterinarias';
 
 let terminarPrograma: boolean = false;
 
+//se crea el metodo ""iniciarPrograma", creando atributos veterinaria, proveedores y option, mensaje principal
+// y un do-while que recorre el método "switchIniciarPrograma" con los parámetros mencionados anteriormente.
 function iniciarPrograma(): void {
     let veterinaria: Veterinaria = new Veterinaria();
     let proveedores: Proveedores = new Proveedores('', 0, 0);
@@ -18,6 +20,7 @@ function iniciarPrograma(): void {
     } while (!terminarPrograma)
 }
 
+//mensajes funcionales que aparecen en consola.
 function mensajeIniciarPrograma(): void {
     console.log(`\n[1]Menu Clientes\n[2]Menu Pacientes\n[3]Menu Proveedores\n[4]Menu Sucursales\n[0]Salir\n`);
 }
@@ -30,6 +33,7 @@ function mensajeSwitchCliente(): void {
     console.log(`\n[1]Agregar cliente\n[2]Agregar nueva visita\n[3]Modificar cliente\n[4]Eliminar cliente\n[5]Mostrar clientes\n[9]Menu Principal\n[0]Salir\n`);
 }
 
+//switch cases para interactuar en los distintos menús
 function switchIniciarPrograma(option: number, veterinaria: Veterinaria, proovedores: Proveedores): void {
     switch (option) {
         case 1:
