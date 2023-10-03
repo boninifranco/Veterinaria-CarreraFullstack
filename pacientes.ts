@@ -8,7 +8,7 @@ export class Pacientes {
         this.especie = especie;
         this.id = id;
     }
-
+    // Getters y setters:
     public getMascotaNombre(): string {
         return this.nombre;
     }
@@ -32,7 +32,8 @@ export class Pacientes {
     public setId(id: number): void {
         this.id = id;
     }
-
+    // Se crea metodo para clasificar el tipo de especie:
+    // Se usa "toLowerCase" para no tener conflictos a la hora de ingresar datos por consola. (Devuelve el valor en minusculas):
     public clasificarEspecie(especie: string): string {
 
         if (especie.toLowerCase() == "perro") {

@@ -28,7 +28,10 @@ export class Veterinaria {
         this.clientes = [cliente, cliente1, cliente2];
         this.pacientes = [paciente, paciente1, paciente2, paciente3, paciente4, paciente5, paciente6];
     }
+<<<<<<< Updated upstream
     //getters y setters:
+=======
+>>>>>>> Stashed changes
     public getSucursales(): Sucursal[] {
         return this.sucursales;
     }

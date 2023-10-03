@@ -8,7 +8,7 @@ export class Datos{
         this.telefono = telefono;
         this.id = id;
     }
-
+    // Getters y setters:
     public getNombre(): string{
         return this.nombre;
     }
