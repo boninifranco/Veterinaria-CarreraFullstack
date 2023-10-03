@@ -8,7 +8,7 @@ export class Sucursal {
             this.direccion = direccion;
             this.id = id;
     }
-
+    // Getters y setters:
     public getNombre(): string {
         return this.nombre;
     }
