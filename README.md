@@ -21,6 +21,7 @@ Cada entidad tiene un ID único generado aleatoriamente, con validación para ev
     Paradigma: Programación Orientada a Objetos
 
 Asegurate de tener instalado Node.js y TypeScript globalmente si usás ts-node.
+
 📌 Estado del proyecto
 
 ✅ Proyecto finalizado y entregado en tiempo y forma.
